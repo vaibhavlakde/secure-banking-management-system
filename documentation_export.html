@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Secure Banking Management System - End to End Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 16mm 14mm 16mm 14mm;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.55;
+      color: #1e293b;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      font-size: 10.5pt;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+    .avoid-break {
+      page-break-inside: avoid;
+    }
+    
+    /* Cover Page */
+    .cover-page {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 2px solid #0f172a;
+      border-radius: 12px;
+      padding: 40px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #0f172a 100%);
+      color: #ffffff;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .cover-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .cover-logo {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 24px;
+      color: white;
+    }
+    .cover-title {
+      font-size: 32pt;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-top: 50px;
+      letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #ffffff, #cbd5e1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .cover-subtitle {
+      font-size: 14pt;
+      color: #94a3b8;
+      margin-top: 15px;
+      max-width: 600px;
+      line-height: 1.4;
+    }
+    .badge-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 30px;
+    }
+    .badge {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 8.5pt;
+      font-weight: 600;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cover-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .author-name {
+      font-size: 13pt;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .author-role {
+      font-size: 9.5pt;
+      color: #38bdf8;
+      font-weight: 500;
+    }
+    .author-contact {
+      font-size: 8.5pt;
+      color: #94a3b8;
+      margin-top: 4px;
+    }
+
+    /* Headings */
+    h1 {
+      font-size: 18pt;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 2px solid #4f46e5;
+      padding-bottom: 6px;
+      margin-top: 30px;
+      margin-bottom: 14px;
+    }
+    h2 {
+      font-size: 14pt;
+      font-weight: 700;
+      color: #1e1b4b;
+      margin-top: 22px;
+      margin-bottom: 10px;
+      border-left: 4px solid #6366f1;
+      padding-left: 8px;
+    }
+    h3 {
+      font-size: 11.5pt;
+      font-weight: 600;
+      color: #334155;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 9pt;
+      page-break-inside: avoid;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 10px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    /* Code Blocks */
+    pre, code {
+      font-family: 'JetBrains Mono', Consolas, monospace;
+    }
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 8pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 10px 0;
+      page-break-inside: avoid;
+    }
+    p code, li code, td code {
+      background: #f1f5f9;
+      color: #4f46e5;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Callout Box */
+    .callout {
+      border-left: 4px solid #4f46e5;
+      background: #eef2ff;
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      margin: 14px 0;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+    .callout-title {
+      font-weight: 700;
+      color: #312e81;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .callout-green {
+      border-left-color: #10b981;
+      background: #ecfdf5;
+    }
+    .callout-green .callout-title {
+      color: #065f46;
+    }
+
+    /* Architecture Diagram ASCII Box */
+    .arch-diagram {
+      background: #1e293b;
+      color: #38bdf8;
+      border-radius: 8px;
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8pt;
+      line-height: 1.35;
+      white-space: pre;
+      margin: 14px 0;
+      page-break-inside: avoid;
+    }
+
+    ul, ol {
+      margin-top: 4px;
+      margin-bottom: 12px;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+
+    .meta-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 14px;
+      page-break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= COVER PAGE ================= -->
+  <div class="cover-page">
+    <div>
+      <div class="cover-brand">
+        <div class="cover-logo">NB</div>
+        <div>
+          <strong style="font-size: 14pt; letter-spacing: 1px;">NEXBANK ENTERPRISE</strong><br>
+          <span style="font-size: 9pt; color: #94a3b8;">High-Security Core Banking Platform</span>
+        </div>
+      </div>
+
+      <div class="cover-title">Secure Banking<br>Management System</div>
+      <div class="cover-subtitle">
+        Comprehensive Technical Specification, System Architecture & End-to-End Implementation Manual
+      </div>
+
+      <div class="badge-bar">
+        <span class="badge">Java 17 LTS</span>
+        <span class="badge">Spring Boot 3.3.4</span>
+        <span class="badge">Spring Security 6</span>
+        <span class="badge">JJWT 0.12.6</span>
+        <span class="badge">Hibernate ORM 6.5</span>
+        <span class="badge">MySQL 8.0</span>
+        <span class="badge">React 18</span>
+        <span class="badge">Tailwind CSS 3.4</span>
+        <span class="badge">Vite 8</span>
+        <span class="badge">ACID Transactions</span>
+      </div>
+    </div>
+
+    <div class="cover-footer">
+      <div>
+        <div class="author-name">Vaibhav Lakde</div>
+        <div class="author-role">Java Full Stack Developer</div>
+        <div class="author-contact">
+          Pune, Maharashtra, India &bull; vaibhavlakde218@gmail.com &bull; +91 9322963704<br>
+          GitHub: github.com/vaibhavlakde &bull; LinkedIn: linkedin.com/in/vaibhav-lakde-1a4406331
+        </div>
+      </div>
+      <div style="text-align: right; color: #94a3b8; font-size: 8.5pt;">
+        Project Version 1.0.0<br>
+        Documentation Release: September 2026
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PAGE 2: TABLE OF CONTENTS & OVERVIEW ================= -->
+  <div class="page-break"></div>
+
+  <h1>1. Executive Summary & Resume Alignment</h1>
+
+  <div class="callout callout-green">
+    <div class="callout-title">&#10003; Verification & Proven Project Alignment</div>
+    This project strictly fulfills all technical criteria outlined in the <strong>Secure Banking Management System</strong> section of Vaibhav Lakde's professional resume. It demonstrates production mastery across Java 17, Spring Boot, Spring Security 6, Hibernate ORM, MySQL, and modern React frontend design.
+  </div>
+
+  <p>The <strong>Secure Banking Management System</strong> (internally designated <em>NexBank</em>) is an enterprise-grade full-stack banking application designed with defense-in-depth security, strict ACID financial consistency, and role-based access control. The project showcases end-to-end full-stack software engineering from relational database design and JWT security filters down to interactive component interfaces inspired by modern fintech platforms.</p>
+
+  <h2>Key Resume Competencies Demonstrated</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 28%;">Resume Specification</th>
+        <th style="width: 32%;">Architectural Implementation</th>
+        <th style="width: 40%;">Key Technical Artifacts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Login & Role-Based Authentication</strong></td>
+        <td>Spring Security 6 stateless filter chain, JJWT 0.12.6 HMAC-SHA256 signature, BCrypt salting/hashing.</td>
+        <td><code>SecurityConfig.java</code>, <code>JwtUtils.java</code>, <code>AuthTokenFilter.java</code>, <code>UserDetailsImpl.java</code></td>
+      </tr>
+      <tr>
+        <td><strong>Account Management REST APIs</strong></td>
+        <td>Auto-provisioned 10-digit account numbers, IFSC codes (<code>SBMS0001024</code>), real-time beneficiary lookup.</td>
+        <td><code>AccountController.java</code>, <code>AccountService.java</code>, <code>AccountRepository.java</code></td>
+      </tr>
+      <tr>
+        <td><strong>Transaction Operations & ACID</strong></td>
+        <td>Atomic fund transfers with <code>Isolation.REPEATABLE_READ</code>, double-entry ledgering, overdraft protection.</td>
+        <td><code>TransactionController.java</code>, <code>TransactionService.java</code>, <code>TransactionRepository.java</code></td>
+      </tr>
+      <tr>
+        <td><strong>Persistent MySQL Management</strong></td>
+        <td>MySQL 8.0 relational schema mapped via Hibernate 6.5 / Spring Data JPA with foreign key cascade & indexes.</td>
+        <td><code>User.java</code>, <code>Account.java</code>, <code>Transaction.java</code>, <code>schema.sql</code>, <code>seed.sql</code></td>
+      </tr>
+      <tr>
+        <td><strong>Responsive React.js Frontend</strong></td>
+        <td>React 18 Single Page App, Tailwind CSS glassmorphism, virtual debit card, printable receipts, admin portal.</td>
+        <td><code>App.jsx</code>, <code>DebitCard.jsx</code>, <code>TransferModal.jsx</code>, <code>AdminPanel.jsx</code>, <code>api.js</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>2. System Architectural Specification</h1>
+
+  <div class="arch-diagram">
++---------------------------------------------------------------------------------------+
+|                               PRESENTATION LAYER (React 18 + Vite)                    |
+|  - Tailwind CSS Glassmorphism UI          - Interactive Digital Platinum Debit Card   |
+|  - 1-Click Demo Switcher (Customer/Admin) - Printable Cryptographic Transaction Receipt|
++-------------------------------------------+-------------------------------------------+
+                                            | HTTPS / JSON + Authorization: Bearer <JWT>
+                                            v
++---------------------------------------------------------------------------------------+
+|                              SPRING SECURITY 6 FILTER CHAIN                           |
+|  - CorsConfigurationSource (Allowed Origins: 5173, 3000)                              |
+|  - AuthTokenFilter (OncePerRequestFilter header parsing)                              |
+|  - JwtUtils (HMAC-SHA256 secret verification & claims extraction)                      |
+|  - SecurityContextHolder (UserDetailsImpl authentication token)                       |
++-------------------------------------------+-------------------------------------------+
+                                            |
+                                            v
++---------------------------------------------------------------------------------------+
+|                               REST API CONTROLLER LAYER                               |
+|  - AuthController: /api/auth/login, /api/auth/register, /api/auth/me                  |
+|  - AccountController: /api/accounts/my-accounts, /api/accounts/verify/{acc}           |
+|  - TransactionController: /api/transactions/deposit, /api/transactions/transfer       |
+|  - AdminController: /api/admin/dashboard, /api/admin/accounts/{acc}/status            |
+|  - GlobalExceptionHandler: @RestControllerAdvice translating exceptions to HTTP codes |
++-------------------------------------------+-------------------------------------------+
+                                            |
+                                            v
++---------------------------------------------------------------------------------------+
+|                               BUSINESS SERVICE LAYER (@Service)                       |
+|  - AuthService: Registration & Token Minting                                          |
+|  - AccountService: Number generation & Beneficiary privacy verification               |
+|  - TransactionService: @Transactional(isolation = REPEATABLE_READ) Atomic Execution   |
+|  - AdminService: System reserve metrics & Account freeze state machine                |
++-------------------------------------------+-------------------------------------------+
+                                            |
+                                            v
++---------------------------------------------------------------------------------------+
+|                              DATA PERSISTENCE LAYER (Spring Data JPA)                 |
+|  - Hibernate ORM 6.5 Entity Mapping & JPQL Aggregation Queries                        |
+|  - UserRepository | AccountRepository | TransactionRepository                         |
++-------------------------------------------+-------------------------------------------+
+                                            | JDBC Pool (HikariCP)
+                                            v
++---------------------------------------------------------------------------------------+
+|                                    PERSISTENCE STORAGE                                |
+|  - Primary Production: MySQL 8.0 InnoDB (banking_db)                                  |
+|  - Fallback Zero-Config: H2 In-Memory/Disk Engine with /h2-console Web Management      |
++---------------------------------------------------------------------------------------+
+  </div>
+
+  <!-- ================= PAGE 3: BACKEND DEEP DIVE ================= -->
+  <div class="page-break"></div>
+
+  <h1>3. Backend Architecture & Package Structure</h1>
+
+  <p>The backend is situated inside <code>/backend</code> and managed via Apache Maven. It strictly uses Java 17 features including enhanced <code>switch</code> expressions, clean records, and modern Spring Boot 3 conventions.</p>
+
+  <h2>3.1 Core Domain Entities (<code>com.bank.securebanking.entity</code>)</h2>
+  <ul>
+    <li><strong><code>User.java</code>:</strong> Represents a bank customer or staff member. Maps to the <code>users</code> table. Contains <code>fullName</code>, unique <code>email</code>, BCrypt <code>password</code>, <code>phone</code>, <code>role</code> (<code>ROLE_CUSTOMER</code> or <code>ROLE_ADMIN</code>), and a one-to-many relationship with <code>Account</code>.</li>
+    <li><strong><code>Account.java</code>:</strong> Represents a financial ledger account. Maps to the <code>accounts</code> table. Generates unique 10-digit account numbers (e.g. <code>1001002026</code>), holds an IFSC code (<code>SBMS0001024</code>), <code>accountType</code> (<code>SAVINGS</code>, <code>CURRENT</code>, <code>FIXED_DEPOSIT</code>), current <code>balance</code> (<code>BigDecimal(15,2)</code>), and <code>status</code> (<code>ACTIVE</code>, <code>FROZEN</code>, <code>CLOSED</code>).</li>
+    <li><strong><code>Transaction.java</code>:</strong> Represents an individual ledger entry. Maps to the <code>transactions</code> table. Contains a unique reference UTR number (e.g. <code>TRF2609030003</code>), <code>transactionType</code> (<code>DEPOSIT</code>, <code>WITHDRAWAL</code>, <code>TRANSFER_SEND</code>, <code>TRANSFER_RECEIVE</code>), <code>amount</code>, <code>postBalance</code> snapshot, and timestamp.</li>
+  </ul>
+
+  <h2>3.2 Security Engine & JWT Infrastructure (<code>com.bank.securebanking.security</code>)</h2>
+  <p>The security layer is decoupled and stateless, complying with OWASP financial application guidelines:</p>
+
+  <div class="meta-card">
+    <div style="font-weight: 700; color: #1e1b4b; margin-bottom: 6px;">JWT Processing Lifecycle</div>
+    <ol style="margin-bottom: 0;">
+      <li><strong>Authentication:</strong> <code>AuthController</code> receives credentials and delegates to <code>AuthenticationManager</code> which invokes <code>UserDetailsServiceImpl</code>.</li>
+      <li><strong>Token Generation:</strong> <code>JwtUtils.java</code> encodes subject email, user ID, full name, and expiration time using HMAC-SHA256 with a 256-bit secret key.</li>
+      <li><strong>Request Filtering:</strong> For subsequent requests, <code>AuthTokenFilter.java</code> extracts <code>Authorization: Bearer &lt;token&gt;</code>, checks integrity via <code>Jwts.parser().verifyWith(key)</code>, and loads user permissions into the <code>SecurityContext</code>.</li>
+      <li><strong>Unauthorized Trapping:</strong> If expired or missing, <code>AuthEntryPointJwt.java</code> returns a structured JSON 401 error.</li>
+    </ol>
+  </div>
+
+  <pre><code>// Security Configuration Snippet (SecurityConfig.java)
+@Bean
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+        .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+        .csrf(csrf -> csrf.disable())
+        .exceptionHandling(ex -> ex.authenticationEntryPoint(unauthorizedHandler))
+        .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+        .authorizeHttpRequests(auth -> auth
+            .requestMatchers("/api/auth/**", "/api/health", "/h2-console/**").permitAll()
+            .requestMatchers("/api/admin/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_BANKER")
+            .anyRequest().authenticated()
+        );
+    http.authenticationProvider(authenticationProvider());
+    http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
+    return http.build();
+}</code></pre>
+
+  <h2>3.3 Transactional Core & Double-Entry Bookkeeping (<code>com.bank.securebanking.service</code>)</h2>
+  <p>All fund movements are handled within <code>TransactionService.java</code> under strict ACID guarantees:</p>
+  <pre><code>@Transactional(isolation = Isolation.REPEATABLE_READ)
+public TransactionDto transfer(TransferRequest request) {
+    // 1. Validation checks: account existence, account equality, active status
+    // 2. Overdraft validation: fromAccount.getBalance().compareTo(request.getAmount()) >= 0
+    // 3. Sender Debit: newBalance = balance - amount
+    // 4. Recipient Credit: newBalance = balance + amount
+    // 5. Audit Logging: Insert paired double-entry ledger rows (TRANSFER_SEND & TRANSFER_RECEIVE)
+    // 6. Return verified TransactionDto with reference UTR
+}</code></pre>
+
+  <!-- ================= PAGE 4: REST API SPECIFICATION ================= -->
+  <div class="page-break"></div>
+
+  <h1>4. REST API Contract & Endpoints</h1>
+
+  <p>All REST APIs adhere to uniform request and response contracts wrapped inside the generic <code>ApiResponse&lt;T&gt;</code> envelope.</p>
+
+  <h2>4.1 Authentication Endpoints (<code>/api/auth</code>)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Method & Endpoint</th>
+        <th>Payload Parameters</th>
+        <th>Response Data</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>POST /api/auth/register</code></td>
+        <td><code>fullName, email, password, phone, accountType, initialDeposit</code></td>
+        <td><code>AuthResponse</code> (JWT Token, User ID, Account Number)</td>
+        <td>Onboards new customer & automatically provisions an active bank account.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/auth/login</code></td>
+        <td><code>email, password</code></td>
+        <td><code>AuthResponse</code> (JWT Token, User ID, Role)</td>
+        <td>Validates credentials against BCrypt hash; issues 24-hour Bearer token.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/auth/me</code></td>
+        <td>None (Requires <code>Bearer &lt;token&gt;</code>)</td>
+        <td>User profile JSON (ID, Full Name, Email, Phone, Role)</td>
+        <td>Retrieves the current authenticated profile.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4.2 Account Management Endpoints (<code>/api/accounts</code>)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Method & Endpoint</th>
+        <th>Access Level</th>
+        <th>Response Data</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>GET /api/accounts/my-accounts</code></td>
+        <td>Customer / Admin</td>
+        <td><code>List&lt;AccountDto&gt;</code></td>
+        <td>Retrieves all accounts belonging to the authenticated user.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/accounts/{accountNumber}</code></td>
+        <td>Owner / Admin</td>
+        <td><code>AccountDto</code></td>
+        <td>Retrieves specific balance, IFSC code, and account status.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/accounts/verify/{accountNumber}</code></td>
+        <td>Authenticated</td>
+        <td><code>AccountDto</code> (Safe)</td>
+        <td>Validates recipient account; returns recipient customer name for confirmation.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/accounts/new</code></td>
+        <td>Authenticated</td>
+        <td><code>AccountDto</code></td>
+        <td>Generates additional Savings, Current, or Fixed Deposit accounts.</td>
+      </tr>
+      <tr>
+        <td><code>PATCH /api/accounts/{accountNumber}/status</code></td>
+        <td><code>ROLE_ADMIN</code></td>
+        <td><code>AccountDto</code></td>
+        <td>Updates account lifecycle state (<code>ACTIVE</code>, <code>FROZEN</code>, <code>CLOSED</code>).</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4.3 Transaction Operations Endpoints (<code>/api/transactions</code>)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Method & Endpoint</th>
+        <th>Payload Parameters</th>
+        <th>Response Data</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>POST /api/transactions/deposit</code></td>
+        <td><code>accountNumber, amount, description</code></td>
+        <td><code>TransactionDto</code></td>
+        <td>Credits funds to active account; records ledger credit entry.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/transactions/withdraw</code></td>
+        <td><code>accountNumber, amount, description</code></td>
+        <td><code>TransactionDto</code></td>
+        <td>Debits funds after balance verification; simulates ATM cash payout.</td>
+      </tr>
+      <tr>
+        <td><code>POST /api/transactions/transfer</code></td>
+        <td><code>fromAccountNumber, toAccountNumber, amount, description</code></td>
+        <td><code>TransactionDto</code></td>
+        <td>Atomic P2P transfer; debits sender, credits receiver, logs dual UTRs.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/transactions/history/{acc}</code></td>
+        <td>Account Owner / Admin</td>
+        <td><code>List&lt;TransactionDto&gt;</code></td>
+        <td>Returns chronological ledger history sorted newest first.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/transactions/receipt/{ref}</code></td>
+        <td>Authenticated</td>
+        <td><code>TransactionDto</code></td>
+        <td>Retrieves individual transaction receipt by UTR reference code.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4.4 Bank Administration Endpoints (<code>/api/admin</code>)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Method & Endpoint</th>
+        <th>Required Role</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>GET /api/admin/dashboard</code></td>
+        <td><code>ROLE_ADMIN</code></td>
+        <td>Returns aggregate bank reserves, total customers, accounts, credit/debit volume.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/admin/accounts</code></td>
+        <td><code>ROLE_ADMIN</code></td>
+        <td>Returns complete registry of all customer accounts in the institution.</td>
+      </tr>
+      <tr>
+        <td><code>GET /api/admin/transactions</code></td>
+        <td><code>ROLE_ADMIN</code></td>
+        <td>Returns immutable global audit log of all transactions system-wide.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= PAGE 5: FRONTEND DEEP DIVE ================= -->
+  <div class="page-break"></div>
+
+  <h1>5. Frontend Architecture & Component Hierarchy</h1>
+
+  <p>The frontend resides in <code>/frontend</code>, built on <strong>React 18</strong> and bundled with <strong>Vite 8</strong>. It features responsive utility-first styling with <strong>Tailwind CSS 3.4</strong>, Lucide React icons, and a custom fintech color palette.</p>
+
+  <h2>5.1 Component Tree & Responsibilities</h2>
+
+  <div class="meta-card">
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 8.5pt; line-height: 1.4;">
+      App.jsx (Global State Controller, Modals, Toasts)<br>
+      ├── Navbar.jsx (Branding, Account Balance Dropdown, User Role Tag, Logout)<br>
+      ├── Sidebar.jsx (Navigation: Dashboard, Transfer, Deposit, Withdraw, Admin)<br>
+      ├── DebitCard.jsx (Virtual Platinum Card: EMV Chip, Card Masking, IFSC, Copy)<br>
+      ├── TransferModal.jsx (2-Step Inter-Account Transfer with Real-Time Beneficiary Lookup)<br>
+      ├── DepositWithdrawModal.jsx (Quick-Amount Deposit & ATM Cash Out Operations)<br>
+      ├── TransactionReceiptModal.jsx (Printable / PDF Cryptographic Receipt)<br>
+      ├── AdminPanel.jsx (Reserve Analytics, Account Freeze/Unfreeze Controls, Audit Trail)<br>
+      └── LoginModal.jsx (1-Click Demo Login Switcher & New Customer Onboarding)
+    </div>
+  </div>
+
+  <h2>5.2 Key Frontend UI Highlights</h2>
+  <ul>
+    <li><strong>Virtual Platinum Debit Card (<code>DebitCard.jsx</code>):</strong> Features metallic radial gradient styling, gold EMV contact chip, contactless RFID icon, toggleable card number masking (<code>•••• •••• 2026</code>), 1-click clipboard copying, and live account status tag.</li>
+    <li><strong>Two-Step Fund Transfer Flow (<code>TransferModal.jsx</code>):</strong>
+      <ol style="margin-bottom: 0;">
+        <li><em>Step 1:</em> User enters recipient account. The <strong>Verify Name</strong> feature queries <code>/api/accounts/verify/{acc}</code> to verify the legal account holder (e.g. <em>Priya Sharma</em>) before any money is transferred.</li>
+        <li><em>Step 2:</em> Displays summary review and asks for a 4-digit Security PIN (<code>1234</code>) to authorize the transaction.</li>
+      </ol>
+    </li>
+    <li><strong>Printable Digital Receipt (<code>TransactionReceiptModal.jsx</code>):</strong> Styled with custom <code>@media print</code> rules. Users can click <strong>"Print Receipt"</strong> to trigger native browser printing or save directly to PDF.</li>
+    <li><strong>Admin Portal (<code>AdminPanel.jsx</code>):</strong> Gives banking supervisors live visibility into total bank reserves, customer distribution, and provides immediate 1-click <strong>Freeze / Unfreeze</strong> buttons for any account.</li>
+  </ul>
+
+  <h1>6. Database Schema & Data Dictionary</h1>
+
+  <p>The relational database is documented in <code>/database/schema.sql</code> and automatically provisioned by Hibernate on startup.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Table Name</th>
+        <th>Column Name</th>
+        <th>Data Type</th>
+        <th>Constraints</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="5"><strong><code>users</code></strong></td>
+        <td><code>id</code></td>
+        <td>BIGINT</td>
+        <td>PK, Auto Increment</td>
+        <td>Primary user surrogate identifier</td>
+      </tr>
+      <tr>
+        <td><code>full_name</code></td>
+        <td>VARCHAR(100)</td>
+        <td>NOT NULL</td>
+        <td>Customer legal name</td>
+      </tr>
+      <tr>
+        <td><code>email</code></td>
+        <td>VARCHAR(120)</td>
+        <td>NOT NULL, UNIQUE</td>
+        <td>Authentication username</td>
+      </tr>
+      <tr>
+        <td><code>password</code></td>
+        <td>VARCHAR(255)</td>
+        <td>NOT NULL</td>
+        <td>BCrypt salted password hash</td>
+      </tr>
+      <tr>
+        <td><code>role</code></td>
+        <td>VARCHAR(30)</td>
+        <td>NOT NULL</td>
+        <td><code>ROLE_CUSTOMER</code> or <code>ROLE_ADMIN</code></td>
+      </tr>
+      <tr>
+        <td rowspan="6"><strong><code>accounts</code></strong></td>
+        <td><code>id</code></td>
+        <td>BIGINT</td>
+        <td>PK, Auto Increment</td>
+        <td>Account surrogate identifier</td>
+      </tr>
+      <tr>
+        <td><code>account_number</code></td>
+        <td>VARCHAR(20)</td>
+        <td>NOT NULL, UNIQUE</td>
+        <td>10-digit public account number</td>
+      </tr>
+      <tr>
+        <td><code>ifsc_code</code></td>
+        <td>VARCHAR(15)</td>
+        <td>NOT NULL</td>
+        <td>Branch IFSC (<code>SBMS0001024</code>)</td>
+      </tr>
+      <tr>
+        <td><code>balance</code></td>
+        <td>DECIMAL(15,2)</td>
+        <td>NOT NULL</td>
+        <td>Current ledger balance</td>
+      </tr>
+      <tr>
+        <td><code>status</code></td>
+        <td>VARCHAR(20)</td>
+        <td>NOT NULL</td>
+        <td><code>ACTIVE</code>, <code>FROZEN</code>, <code>CLOSED</code></td>
+      </tr>
+      <tr>
+        <td><code>user_id</code></td>
+        <td>BIGINT</td>
+        <td>FK &rarr; <code>users.id</code></td>
+        <td>Cascade delete ownership link</td>
+      </tr>
+      <tr>
+        <td rowspan="6"><strong><code>transactions</code></strong></td>
+        <td><code>id</code></td>
+        <td>BIGINT</td>
+        <td>PK, Auto Increment</td>
+        <td>Transaction surrogate identifier</td>
+      </tr>
+      <tr>
+        <td><code>reference_number</code></td>
+        <td>VARCHAR(36)</td>
+        <td>NOT NULL, UNIQUE</td>
+        <td>Bank UTR reference code</td>
+      </tr>
+      <tr>
+        <td><code>account_id</code></td>
+        <td>BIGINT</td>
+        <td>FK &rarr; <code>accounts.id</code></td>
+        <td>Associated account ledger</td>
+      </tr>
+      <tr>
+        <td><code>transaction_type</code></td>
+        <td>VARCHAR(25)</td>
+        <td>NOT NULL</td>
+        <td><code>DEPOSIT</code>, <code>WITHDRAWAL</code>, <code>TRANSFER_*</code></td>
+      </tr>
+      <tr>
+        <td><code>amount</code></td>
+        <td>DECIMAL(15,2)</td>
+        <td>NOT NULL</td>
+        <td>Debit or credit transaction amount</td>
+      </tr>
+      <tr>
+        <td><code>post_balance</code></td>
+        <td>DECIMAL(15,2)</td>
+        <td>NOT NULL</td>
+        <td>Balance after transaction execution</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ================= PAGE 6: OPERATIONS & INTERVIEW GUIDE ================= -->
+  <div class="page-break"></div>
+
+  <h1>7. Operational Guide & Pre-Seeded Demo Data</h1>
+
+  <h2>7.1 Pre-Configured Test Accounts</h2>
+  <p>The application automatically seeds realistic data via <code>DataInitializer.java</code> on initial boot:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Role / Persona</th>
+        <th>Login Email</th>
+        <th>Password</th>
+        <th>Account Number</th>
+        <th>Initial Balance</th>
+        <th>Capabilities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Primary Customer</strong><br>(Vaibhav Lakde)</td>
+        <td><code>vaibhav@gmail.com</code></td>
+        <td><code>Vaibhav@123</code></td>
+        <td><code>1001002026</code></td>
+        <td><strong>&#8377;75,450.00</strong></td>
+        <td>Transfers, cash deposits, ATM cash withdrawals, printable receipts, account creation.</td>
+      </tr>
+      <tr>
+        <td><strong>Beneficiary Customer</strong><br>(Priya Sharma)</td>
+        <td><code>priya@gmail.com</code></td>
+        <td><code>Priya@123</code></td>
+        <td><code>1001002027</code></td>
+        <td><strong>&#8377;42,800.00</strong></td>
+        <td>Receives peer-to-peer transfers, verifies name lookup.</td>
+      </tr>
+      <tr>
+        <td><strong>Bank Administrator</strong><br>(System Admin)</td>
+        <td><code>admin@bank.com</code></td>
+        <td><code>Admin@123</code></td>
+        <td><em>Central Reserve</em></td>
+        <td><em>Total Reserves</em></td>
+        <td>Full bank oversight, customer account freeze/unfreeze toggles, global audit log.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>7.2 Running the Application Locally</h2>
+  <div class="meta-card">
+    <strong>Step 1: Start Backend (Port 8080)</strong>
+    <pre><code>cd backend
+mvn clean spring-boot:run</code></pre>
+    <em>Verify health: <code>http://localhost:8080/api/health</code></em>
+  </div>
+
+  <div class="meta-card">
+    <strong>Step 2: Start Frontend (Port 5173)</strong>
+    <pre><code>cd frontend
+npm install
+npm run dev</code></pre>
+    <em>Open browser: <code>http://localhost:5173</code></em>
+  </div>
+
+  <h1>8. Technical Interview Preparation & Talking Points</h1>
+
+  <div class="callout">
+    <div class="callout-title">&#128161; How to present this project during a technical interview</div>
+    Highlight the architectural decisions, security considerations, and edge cases you tackled rather than just listing features.
+  </div>
+
+  <h3>Q1: "How did you ensure fund transfers don't result in dirty reads or double-spending?"</h3>
+  <p><strong>Answer:</strong> <em>"In <code>TransactionService</code>, I annotated the transfer method with <code>@Transactional(isolation = Isolation.REPEATABLE_READ)</code>. This ensures that when querying the sender's balance, no concurrent transaction can modify the record during execution. The debit and credit legs occur within the exact same database transaction boundary. If an exception occurs—such as a network timeout or insufficient funds—the entire transaction rolls back cleanly, maintaining ACID compliance."</em></p>
+
+  <h3>Q2: "How is security implemented without session state?"</h3>
+  <p><strong>Answer:</strong> <em>"I implemented a stateless JWT authentication model using Spring Security 6 and JJWT 0.12.6. When a user logs in, their password is validated using BCrypt. Upon success, a signed HMAC-SHA256 JWT is returned containing their identity and role authorities. An <code>AuthTokenFilter</code> subclasses <code>OncePerRequestFilter</code> to inspect the Bearer token on every request, validate its cryptographic signature and expiration, and establish the user's <code>Authentication</code> in the <code>SecurityContextHolder</code>."</em></p>
+
+  <h3>Q3: "How does the frontend handle token expiration and authorization errors?"</h3>
+  <p><strong>Answer:</strong> <em>"The React frontend uses a centralized API client in <code>api.js</code>. If a response returns HTTP 401 Unauthorized or 403 Forbidden, it automatically triggers a logout callback that purges localStorage tokens and pops up the <code>LoginModal</code>, notifying the user gracefully with a toast notification rather than breaking the UI state."</em></p>
+
+  <div style="margin-top: 40px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 15px; font-size: 8.5pt; color: #94a3b8;">
+    Secure Banking Management System &bull; Architectural Documentation &bull; Built with Spring Boot 3 & React 18 &bull; Author: Vaibhav Lakde
+  </div>
+
+</body>
+</html>
